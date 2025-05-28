@@ -393,7 +393,10 @@
     </style>
 </head>
 <body>
-    
+    <audio id="autoAudio" autoplay muted>
+  <source src="HAPPY.mp3" type="audio/mpeg">
+</audio>
+
     <div class="container">
         <div class="prompt-text" id="promptText">🕯️ Blow the candles! 🕯️</div>
         
@@ -509,6 +512,12 @@
             e.preventDefault();
             this.click();
         });
+        document.addEventListener("click", () => {
+  const audio = document.getElementById("autoAudio");
+  audio.muted = false;
+  audio.play();
+});
+
     </script>
 </body>
 </html>
