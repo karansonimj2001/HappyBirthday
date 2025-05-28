@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Simran!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #78093d 0%, #cc89a9 50%, #5d0933 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .cake {
+            position: relative;
+            margin: 20px auto;
+            transform: scale(min(1.2, 0.8 + 0.4 * (100vw / 400px)));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: levitate 4s ease-in-out infinite;
+            filter: drop-shadow(0 25px 35px rgba(255, 20, 147, 0.7));
+        }
+
+        .cake::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(255, 20, 147, 0.4) 0%, rgba(255, 20, 147, 0.2) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: shadow-pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes levitate {
+            0%, 100% { 
+                transform: scale(min(1.2, 0.8 + 0.4 * (100vw / 400px))) translateY(0px); 
+                filter: drop-shadow(0 25px 35px rgba(255, 20, 147, 0.7));
+            }
+            50% { 
+                transform: scale(min(1.2, 0.8 + 0.4 * (100vw / 400px))) translateY(-20px); 
+                filter: drop-shadow(0 45px 60px rgba(255, 20, 147, 0.9));
+            }
+        }
+
+        @keyframes shadow-pulse {
+            0%, 100% { 
+                width: 200px;
+                opacity: 0.6;
+                transform: translateX(-50%) scaleY(1);
+            }
+            50% { 
+                width: 240px;
+                opacity: 0.3;
+                transform: translateX(-50%) scaleY(0.8);
+            }
+        }
+
+        .cake-base {
+            width: 300px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .cake-layer {
+            width: 280px;
+            height: 60px;
+            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+            border-radius: 12px;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .cake-top {
+            width: 260px;
+            height: 40px;
+            background: linear-gradient(45deg, #fbb7c3, #f8a8b4);
+            border-radius: 10px;
+            position: absolute;
+            top: -90px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 6px 15px rgba(255, 192, 203, 0.3);
+        }
+
+        .frosting {
+            position: absolute;
+            top: -3px;
+            left: 0;
+            right: 0;
+            height: 16px;
+            background: linear-gradient(45deg, #ffe4e1, #ffc0cb);
+            border-radius: 50px;
+            box-shadow: inset 0 2px 4px rgba(255, 105, 180, 0.2);
+        }
+
+        .candles {
+            position: absolute;
+            top: -130px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 30px;
+            width: 200px;
+        }
+
+        .candle {
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ff69b4, #ff1493);
+            border-radius: 4px 4px 0px 0px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .flame {
+            width: 12px;
+            height: 15px;
+            background: radial-gradient(circle, #ffa500 30%, #ff4500 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -15px;
+            left: -2px;
+            animation: flicker 0.5s infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-1deg); }
+            100% { transform: scale(1.1) rotate(1deg); }
+        }
+
+        .blown .flame {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .blow-button {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: min(18px, 4.5vw);
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 50px;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            min-width: 200px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .blow-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 20, 147, 0.6);
+        }
+
+        .blow-effect {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .wind {
+            width: 100px;
+            height: 20px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            border-radius: 50px;
+            opacity: 0;
+            transform: scale(0);
+            animation: blow 1s ease-out;
+        }
+
+        @keyframes blow {
+            0% { opacity: 0; transform: scale(0) translateX(-50px); }
+            50% { opacity: 1; transform: scale(1) translateX(0); }
+            100% { opacity: 0; transform: scale(1.2) translateX(50px); }
+        }
+
+        .message {
+            font-size: min(36px, 8vw);
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(255, 20, 147, 0.8);
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+            animation: celebrate 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: heart-fall 4.5s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes heart-fall {
+            0% { 
+                transform: translateY(-30px) rotate(0deg) scale(0.8); 
+                opacity: 1; 
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(20vh) rotate(72deg) scale(1);
+            }
+            80% {
+                opacity: 0.8;
+                transform: translateY(80vh) rotate(288deg) scale(0.9);
+            }
+            100% { 
+                transform: translateY(110vh) rotate(360deg) scale(0.5); 
+                opacity: 0; 
+            }
+        }
+
+        .prompt-text {
+            color: white;
+            font-size: min(24px, 6vw);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(255, 20, 147, 0.6);
+            animation: glow 2s ease-in-out infinite alternate;
+            font-weight: bold;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 2px 2px 6px rgba(255, 20, 147, 0.6); }
+            100% { text-shadow: 2px 2px 6px rgba(255, 20, 147, 0.6), 0 0 15px rgba(255, 105, 180, 0.8); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+            
+            .cake {
+                transform: scale(0.8);
+                margin: 10px auto;
+            }
+
+            .cake::before {
+                width: 160px;
+                bottom: -70px;
+            }
+            
+            @keyframes levitate {
+                0%, 100% { 
+                    transform: scale(0.8) translateY(0px); 
+                    filter: drop-shadow(0 20px 28px rgba(255, 20, 147, 0.7));
+                }
+                50% { 
+                    transform: scale(0.8) translateY(-16px); 
+                    filter: drop-shadow(0 36px 48px rgba(255, 20, 147, 0.9));
+                }
+            }
+
+            @keyframes shadow-pulse {
+                0%, 100% { 
+                    width: 160px;
+                    opacity: 0.6;
+                    transform: translateX(-50%) scaleY(1);
+                }
+                50% { 
+                    width: 190px;
+                    opacity: 0.3;
+                    transform: translateX(-50%) scaleY(0.8);
+                }
+            }
+            
+            .candles {
+                gap: 25px;
+            }
+            
+            .blow-button {
+                min-width: 180px;
+                padding: 12px 25px;
+                font-size: 16px;
+                margin-top: 40px;
+            }
+            
+            .heart {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .cake {
+                transform: scale(0.7);
+            }
+
+            .cake::before {
+                width: 140px;
+                bottom: -60px;
+            }
+            
+            @keyframes levitate {
+                0%, 100% { 
+                    transform: scale(0.7) translateY(0px); 
+                    filter: drop-shadow(0 18px 24px rgba(255, 20, 147, 0.7));
+                }
+                50% { 
+                    transform: scale(0.7) translateY(-14px); 
+                    filter: drop-shadow(0 32px 42px rgba(255, 20, 147, 0.9));
+                }
+            }
+
+            @keyframes shadow-pulse {
+                0%, 100% { 
+                    width: 140px;
+                    opacity: 0.6;
+                    transform: translateX(-50%) scaleY(1);
+                }
+                50% { 
+                    width: 170px;
+                    opacity: 0.3;
+                    transform: translateX(-50%) scaleY(0.8);
+                }
+            }
+            
+            .candles {
+                gap: 20px;
+            }
+            
+            .blow-button {
+                min-width: 160px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .heart {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="prompt-text" id="promptText">🕯️ Blow the candles! 🕯️</div>
+        
+        <div class="cake">
+            <div class="cake-base">
+                <div class="frosting"></div>
+            </div>
+            <div class="cake-layer">
+                <div class="frosting"></div>
+            </div>
+            <div class="cake-top">
+                <div class="frosting"></div>
+            </div>
+            
+            <div class="candles" id="candles">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+            
+            <div class="blow-effect" id="blowEffect"></div>
+        </div>
+        
+        <button class="blow-button" id="blowButton">🌬️ Blow Candles Baby</button>
+        
+        <div class="message" id="message">🎉 Happy Birthday Simran! 🎉</div>
+        <button class="nav-btn blow-button" onclick="location.href='index.html'">Back</button>
+    </div>
+
+    <script>
+        const blowButton = document.getElementById('blowButton');
+        const candles = document.getElementById('candles');
+        const blowEffect = document.getElementById('blowEffect');
+        const message = document.getElementById('message');
+        const promptText = document.getElementById('promptText');
+
+        function createHeartRain() {
+            const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '💜', '🩷', '❤️'];
+            
+            // Create continuous heart rain
+            const heartInterval = setInterval(() => {
+                for (let i = 0; i < 2; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart';
+                        heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.animationDelay = Math.random() * 0.8 + 's';
+                        heart.style.animationDuration = (Math.random() * 1.5 + 3.5) + 's';
+                        
+                        // Add color variations
+                        const colors = ['#ff69b4', '#ff1493', '#da70d6', '#ff91a4', '#ffb6c1', '#ffc0cb'];
+                        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                        
+                        document.body.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            if (heart.parentNode) {
+                                heart.remove();
+                            }
+                        }, 7000);
+                    }, i * 150);
+                }
+            }, 400);
+            
+            // Stop heart rain after 12 seconds
+            setTimeout(() => {
+                clearInterval(heartInterval);
+            }, 12000);
+        }
+
+        blowButton.addEventListener('click', function() {
+            // Hide prompt text and button
+            promptText.style.opacity = '0';
+            blowButton.style.display = 'none';
+            
+            // Create blow effect
+            const wind = document.createElement('div');
+            wind.className = 'wind';
+            blowEffect.appendChild(wind);
+            
+            // Blow out candles with staggered effect
+            setTimeout(() => {
+                candles.classList.add('blown');
+            }, 300);
+            
+            // Show birthday message and start heart rain
+            setTimeout(() => {
+                message.classList.add('show');
+                createHeartRain();
+            }, 1500);
+            
+            // Clean up wind effect
+            setTimeout(() => {
+                wind.remove();
+            }, 1000);
+        });
+
+        // Add touch support for mobile
+        blowButton.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.click();
+        });
+    </script>
+</body>
+</html>
