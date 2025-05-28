@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Simran! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.7);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            perspective: 1000px;
+        }
+
+        .card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card {
+            position: absolute;
+            width: 320px;
+            height: 450px;
+            background: linear-gradient(145deg, #ffffff, #fff8f8);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+            transform-origin: center center;
+            border: 3px solid rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(255, 105, 180, 0.3);
+        }
+
+        .card.removing {
+            animation: cardRemove 1s ease-in-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes cardRemove {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-80px) rotate(12deg) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-400px) rotate(25deg) scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        .photo-container {
+            width: 200px;
+            height: 150px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        .birthday-message {
+            font-size: 1.3rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .special-card {
+            background: linear-gradient(145deg, #fff0f5, #ffe4e6) !important;
+        }
+
+        .final-card {
+            background: linear-gradient(145deg, #ff69b4, #ff1493) !important;
+            color: white !important;
+        }
+
+        .final-card .birthday-message,
+        .final-card .card-description {
+            color: white !important;
+        }
+
+        .reset-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .reset-btn.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.5);
+        }
+
+        .birthday-header {
+            text-align: center;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 35px;
+            border-radius: 20px;
+            font-size: 1.8rem;
+            color: #d63384;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            animation: fadeInDown 1s ease-out;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .birthday-header {
+                padding: 10px 20px;
+                font-size: 2.5vh;
+            }
+            .card {
+                height: 400px;
+                padding: 20px;
+            }
+            .birthday-header {
+                font-size: 3vh;
+                padding: 8px 20px;
+            }
+
+            .reset-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 16px;
+            animation: sparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .instructions {
+            text-align: center;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-header">
+        🎉 Happy Birthday Simran! 🎂
+    </div>
+    
+    <div class="instructions">
+        Click each card to reveal your birthday surprise! 💕
+    </div>
+
+    <div class="container">
+        <div class="card-stack" id="cardStack">
+            <!-- Cards will be dynamically generated -->
+        </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">🎁 Start Over</button>
+
+    <script>
+        class BirthdayCards {
+            constructor() {
+                this.cardStack = document.getElementById('cardStack');
+                this.resetBtn = document.getElementById('resetBtn');
+                this.cards = [];
+                this.cardData = [
+                    { 
+                        message: "Smile 💕", 
+                        description: " Your smile makes my day brighter my cutie pie💖💖 . ",
+                        imageUrl: "sideyes.jpg"
+                    },
+                    { 
+                        message: "Your Presence 🌟", 
+                        description: "Your presence is my comfort zone. When you're around, it feels like every challenge in the world just became easier.",
+                        imageUrl: "heartshape1.jpg"
+                    },
+                    { 
+                        message: "Your voice 💕 ", 
+                        description: "The way you talk is so beautiful that every word touches my heart. You don’t just speak — you understands my feeling QT.",
+                        imageUrl: "bestdiwali.jpg"
+                    },
+                    { 
+                        message: "Your Love for me 💖", 
+                        description: "Your love is unconditional and pure. The way you love can only come from a truly genuine heart.",
+                        imageUrl: "bestdiwalivictory.jpg"
+                    },
+                    { 
+                        message: "Your Eyes🌸", 
+                        description: "Your eyes hold a depth filled with honesty and love. Sometimes, I feel like your eyes say everything I need to hear.",
+                        imageUrl: "eyes.jpg"
+                    },
+                    { 
+                        message: "Your Support 💫", 
+                        description: "Whenever I feel tired or about to give up, your support lifts me back up. You are my backbone.",
+                        imageUrl: "favbluepount.jpg"
+                    },
+                    { 
+                        message: "Beautiful Soul 🌺", 
+                        description: "Your radiant smile that lights up every room - pure sunshine!",
+                        imageUrl: "redsuitmata.jpg"
+                    },
+                    { 
+                        message: "Your Uniqueness 🎀", 
+                        description: "You’re perfect just the way you are. Every little thing about you has its own charm that makes you truly unique.",
+                        imageUrl: "nakhre.jpg"
+                    },
+                    { 
+                        message: "Your Importance in my life 🌈", 
+                        description: "My life feels incomplete without you. You’re not just my girlfriend — you’re the most beautiful part of my life.",
+                        imageUrl: "modelstand.jpg"
+                    },
+                    { 
+                        message: "Happy Birthday Beautiful! 🎂", 
+                        description: "Simran, you make every day brighter just by being you. Here's to another year of amazing memories together! I love you! ✨",
+                        imageUrl: "poutgreypiece.jpg",
+                        special: true
+                    }
+                ];
+                
+                this.init();
+                this.createFloatingElements();
+            }
+
+            init() {
+                this.createCards();
+                this.setupEventListeners();
+            }
+
+            createCards() {
+                this.cardStack.innerHTML = '';
+                this.cards = [];
+
+                this.cardData.forEach((data, index) => {
+                    const card = document.createElement('div');
+                    card.className = `card ${data.special ? 'final-card' : ''}`;
+                    
+                    card.innerHTML = `
+                        <div class="photo-container">
+                            <img src="${data.imageUrl}" alt="${data.message}" />
+                        </div>
+                        <div class="birthday-message">${data.message}</div>
+                        <div class="card-description">${data.description}</div>
+                    `;
+
+                    // Stack positioning with romantic offset
+                    const offset = index * 6;
+                    const rotation = (index - 2) * 1.5;
+                    card.style.transform = `translateX(${40 + offset}px) translateY(${75 + offset}px) rotate(${rotation}deg)`;
+                    card.style.zIndex = this.cardData.length - index;
+
+                    // Special styling for different cards
+                    if (index === this.cardData.length - 1) {
+                        // Final birthday card
+                        card.classList.add('final-card');
+                    } else if (index % 2 === 0) {
+                        card.classList.add('special-card');
+                    }
+
+                    card.addEventListener('click', () => this.removeTopCard());
+                    
+                    this.cardStack.appendChild(card);
+                    this.cards.push(card);
+                });
+
+                this.updateResetButton();
+            }
+
+            removeTopCard() {
+                const topCard = this.getTopCard();
+                if (!topCard) return;
+
+                // Add some sparkle effect
+                this.createSparkles(topCard);
+
+                topCard.classList.add('removing');
+                topCard.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    if (topCard.parentNode) {
+                        topCard.parentNode.removeChild(topCard);
+                    }
+                    this.cards = this.cards.filter(card => card !== topCard);
+                    this.updateCardPositions();
+                    this.updateResetButton();
+                }, 1000);
+            }
+
+            createSparkles(card) {
+                for (let i = 0; i < 6; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle';
+                        sparkle.innerHTML = '✨';
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        card.appendChild(sparkle);
+
+                        setTimeout(() => {
+                            if (sparkle.parentNode) {
+                                sparkle.parentNode.removeChild(sparkle);
+                            }
+                        }, 2000);
+                    }, i * 100);
+                }
+            }
+
+            getTopCard() {
+                let topCard = null;
+                let highestZIndex = -1;
+
+                this.cards.forEach(card => {
+                    const zIndex = parseInt(window.getComputedStyle(card).zIndex) || 0;
+                    if (zIndex > highestZIndex && !card.classList.contains('removing')) {
+                        highestZIndex = zIndex;
+                        topCard = card;
+                    }
+                });
+
+                return topCard;
+            }
+
+            updateCardPositions() {
+                this.cards.forEach((card, index) => {
+                    if (!card.classList.contains('removing')) {
+                        const offset = index * 6;
+                        const rotation = (index - 1) * 1.5;
+                        
+                        setTimeout(() => {
+                            card.style.transform = `translateX(${40 + offset}px) translateY(${75 + offset}px) rotate(${rotation}deg)`;
+                            card.style.zIndex = this.cards.length - index;
+                        }, 100);
+                    }
+                });
+            }
+
+            updateResetButton() {
+                if (this.cards.length === 0 || this.cards.length < this.cardData.length) {
+                    this.resetBtn.classList.add('show');
+                } else {
+                    this.resetBtn.classList.remove('show');
+                }
+            }
+
+            createFloatingElements() {
+                // Create floating hearts
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart';
+                        heart.innerHTML = '💕';
+                        heart.style.left = Math.random() * 100 + '%';
+                        heart.style.top = Math.random() * 100 + '%';
+                        heart.style.animationDelay = Math.random() * 6 + 's';
+                        document.body.appendChild(heart);
+                    }, i * 500);
+                }
+            }
+
+            setupEventListeners() {
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetBtn.classList.remove('show');
+                    setTimeout(() => {
+                        this.createCards();
+                    }, 300);
+                });
+            }
+        }
+
+        // Initialize the birthday cards when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BirthdayCards();
+        });
+    </script>
+</body>
+</html>

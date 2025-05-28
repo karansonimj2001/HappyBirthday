@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Simran 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem;
+      position: relative;
+    }
+
+    .typing {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: #FF69B4;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(30) forwards, blink 1s infinite;
+    }
+
+    @keyframes typing {
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .love-letter {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: #111;
+      border: 1px solid #FF69B4;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      display: none;
+    }
+
+    .btn {
+      background: #FF69B4;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-top: 2rem;
+      transition: 0.3s ease;
+    }
+    .btn:hover {
+      background: #f0a;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem auto;
+      max-width: 1000px;
+    }
+
+    .gallery img {
+      width: 200px;
+      height: 250px;
+      object-fit: cover;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #f0a;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #888;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: pink;
+      position: absolute;
+      animation: float 7s infinite ease-in;
+      transform: rotate(45deg);
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <div class="typing" id="type">Happy Birthday Simran 🎉</div>
+    <button class="btn" onclick="showLetter()">Click to Read My Love Letter</button>
+  </header>
+
+  <section class="love-letter" id="letter">
+    <p>My dearest Simran,</p>
+    <p>
+      You're the reason my world is brighter every day. Your smile, your voice, your presence—
+      they all make everything better. Thank you for being my sunshine. I promise to celebrate you not just today,
+      but every day of my life. I love you endlessly. 💖
+    </p>
+    <p>– Karan</p>
+    <button class="btn" onclick="scrollToGallery()">See Our Memories 📸</button>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <!-- Add your images here -->
+    <img src="photo1.jpg" alt="Memory 1">
+    <img src="photo2.jpg" alt="Memory 2">
+    <img src="photo3.jpg" alt="Memory 3">
+    <img src="photo4.jpg" alt="Memory 4">
+  </section>
+
+  <!-- YouTube Music Embed -->
+  <div style="display: flex; justify-content: center; margin-top: 2rem;">
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/Grr0FlC8SQA?autoplay=1&loop=1&playlist=Grr0FlC8SQA" 
+    title="Tum Mile" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+  <footer>
+    Made with 💖 by Karan for Simran
+  </footer>
+
+  <!-- Script -->
+  <script>
+    function showLetter() {
+      document.getElementById('letter').style.display = 'block';
+    }
+
+    function scrollToGallery() {
+      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Generate floating hearts
+    const heartContainer = document.getElementById("hearts");
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 3 + "s";
+      heartContainer.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }, 300);
+  </script>
+
+</body>
+</html>
